@@ -1,0 +1,28 @@
+# 워뇨띠 공개 파일의 실제 컬럼명에 맞추는 설정입니다.
+# 기본값은 BitMEX API 필드명입니다. `python -m src.inspect_data inspect <파일>` 결과를 보고 고치세요.
+
+paths:
+  executions: data/processed/executions.parquet
+  wallet: data/processed/wallet.parquet
+  output: data/processed/exposure.parquet
+
+executions:
+  time: timestamp        # 체결 시각
+  symbol: symbol         # 예: XBTUSD
+  side: side             # Buy / Sell
+  qty: lastQty           # 체결 수량 (XBT 인버스: 1계약 = 1달러)
+  price: lastPx          # 체결 가격
+  exec_type: execType    # 포지션 계산엔 Trade만 사용 (Funding 등 제외). 컬럼이 없으면 null
+  order_type: ordType    # Limit / Market 등. 컬럼이 없으면 null
+  trade_exec_types: [Trade]
+
+wallet:
+  time: transactTime     # 지갑 기록 시각
+  balance: walletBalance # 기록 직후 지갑 잔고
+  unit_divisor: 100000000  # BitMEX 지갑 금액은 사토시 단위 → BTC로 환산. 이미 BTC면 1
+  currency: currency     # 통화 컬럼(없으면 null). 아래 값만 남김
+  currency_keep: [XBt, XBT, BTC]
+
+# 1차 버전은 XBT 인버스 계약(무기한 XBTUSD + XBTZ20 같은 분기 선물)만 계산합니다.
+# ETHUSD(콴토) 등은 제외되고 제외 목록이 출력됩니다.
+inverse_symbol_regex: '^XBT(USD|[FGHJKMNQUVXZ]\d{2})$'
