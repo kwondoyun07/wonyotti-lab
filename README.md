@@ -38,7 +38,7 @@ VS Code에서는 폴더를 연 뒤 `Python: Select Interpreter`로 `.venv`를 �
 ## 단계
 
 ### 1. 데이터 구조 확인 & 변환
-공개 파일(디시인사이드 차트갤러리 원글: https://gall.dcinside.com/mgallery/board/view/?id=chartanalysis&no=5051684)을
+공개 파일(디시인사이드 차트갤러리 [원글](https://gall.dcinside.com/mgallery/board/view/?id=chartanalysis&no=5051684))을
 `data/raw/`에 넣고 압축을 푼 뒤:
 
 ```bash
